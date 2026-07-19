@@ -30,7 +30,7 @@ def render_sidebar(
 ) -> None:
     """Render the entire sidebar. Mutates st.session_state to drive app.py."""
     with st.sidebar:
-        st.markdown('<h2 class="accent-header">🤖 AI Assistant</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="accent-header">✨ Nova AI</h2>', unsafe_allow_html=True)
 
         _render_new_chat_button(history)
         st.divider()
@@ -54,7 +54,7 @@ def render_sidebar(
 # New chat
 # --------------------------------------------------------------------------
 def _render_new_chat_button(history: HistoryManager) -> None:
-    if st.button("➕ New Chat", use_container_width=True, type="primary"):
+    if st.button("📝 New chat", use_container_width=True, type="primary"):
         settings = load_settings()
         conv = history.create_conversation(model=settings["model"])
         st.session_state.current_conv_id = conv.id

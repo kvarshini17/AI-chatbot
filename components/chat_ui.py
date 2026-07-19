@@ -108,15 +108,46 @@ def inject_custom_css(font_size: str = "Medium") -> None:
             font-weight: 700;
         }}
 
-        /* Buttons */
+        /* Streamlit Button Overrides */
         .stButton > button {{
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid {COLOR_BORDER};
             transition: all 0.15s ease-in-out;
         }}
         .stButton > button:hover {{
             border-color: #8B5CF6;
-            transform: translateY(-1px);
+        }}
+        
+        /* ChatGPT-style Sidebar Buttons */
+        section[data-testid="stSidebar"] [data-testid="baseButton-secondary"] {{
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            text-align: left !important;
+            padding: 4px 8px !important;
+            justify-content: flex-start !important;
+            border-radius: 8px !important;
+            color: #d1d5db !important;
+            font-weight: 400 !important;
+        }}
+        section[data-testid="stSidebar"] [data-testid="baseButton-secondary"]:hover {{
+            background-color: #2a2b32 !important;
+            color: #ffffff !important;
+        }}
+        
+        /* Sidebar Primary Button (New Chat) */
+        section[data-testid="stSidebar"] [data-testid="baseButton-primary"] {{
+            background-color: transparent !important;
+            border: none !important;
+            text-align: left !important;
+            justify-content: flex-start !important;
+            padding: 8px !important;
+            border-radius: 8px !important;
+            color: #ffffff !important;
+            font-weight: 500 !important;
+        }}
+        section[data-testid="stSidebar"] [data-testid="baseButton-primary"]:hover {{
+            background-color: #2a2b32 !important;
         }}
 
         /* Source citation chips */
@@ -131,9 +162,22 @@ def inject_custom_css(font_size: str = "Medium") -> None:
             color: {COLOR_MUTED_TEXT};
         }}
 
-        /* Sticky-feeling chat input (Streamlit already pins st.chat_input) */
+        /* Sticky-feeling chat input */
         div[data-testid="stChatInput"] {{
-            border-top: 1px solid {COLOR_BORDER};
+            background-color: #212121 !important;
+            border: 1px solid #424242 !important;
+            border-radius: 24px !important;
+            padding-left: 12px !important;
+        }}
+
+        div[data-testid="stChatInput"] textarea {{
+            background-color: transparent !important;
+            color: #FFFFFF !important;
+            caret-color: #FFFFFF !important;
+        }}
+
+        div[data-testid="stChatInput"] textarea::placeholder {{
+            color: #888888 !important;
         }}
 
         /* Scrollable chat container */
@@ -142,23 +186,6 @@ def inject_custom_css(font_size: str = "Medium") -> None:
             overflow-y: auto;
             padding-right: 6px;
         }}
-       /* Chat input black theme */
-div[data-testid="stChatInput"] {{
-    background-color: #000000 !important;
-    border: 1px solid #666666 !important;
-    border-radius: 12px !important;
-}}
-
-div[data-testid="stChatInput"] textarea {{
-    background-color: #000000 !important;
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
-    caret-color: #FFFFFF !important;
-}}
-
-div[data-testid="stChatInput"] textarea::placeholder {{
-    color: #BDBDBD !important;
-}}
         </style>
         """,unsafe_allow_html=True)
 def render_message(role: str, content: str) -> None:

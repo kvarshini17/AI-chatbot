@@ -99,6 +99,13 @@ def _handle_user_turn(
 ) -> None:
     """Handle a single round-trip: render the user's message, stream the
     assistant's reply with a typing effect, and persist everything."""
+    if conv.title == "New Chat":
+        new_title = user_input.strip()
+        if len(new_title) > 40:
+            new_title = new_title[:37] + "..."
+        history.rename_conversation(conv.id, new_title)
+        conv.title = new_title
+
     chat_ui.render_message("user", user_input)
 
     placeholder = st.empty()
